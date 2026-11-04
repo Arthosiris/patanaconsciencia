@@ -4,132 +4,150 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pata na Consciência</title>
-<meta name="description" content="Projeto de extensão da USP — Pata na Consciência.">
+<meta name="description" content="Campanha de conscientização pela proteção animal, com atenção especial aos gatos com deficiência. Projeto de extensão da USP.">
+<link rel="icon" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   /* =========================================================
-     CORES DO PROJETO — troque só aqui pelas cores oficiais
+     CORES DO PROJETO (tiradas do material de divulgação)
      ========================================================= */
   :root {
-    --cor-principal: #C8553D;   /* cor de destaque (botões, títulos) */
-    --cor-escura:    #2E3A2F;   /* textos fortes, rodapé */
-    --cor-clara:     #F7F1E8;   /* fundo das seções alternadas */
-    --cor-apoio:     #E9B44C;   /* detalhes */
-    --fundo:         #FFFFFF;
-    --texto:         #2B2B2B;
-    --texto-suave:   #5F5F5F;
-    --raio: 14px;
+    --verde:      #6DBDB1;   /* verde-água */
+    --verde-esc:  #4E9E93;
+    --laranja:    #F5A962;
+    --roxo:       #3B2840;   /* títulos */
+    --creme:      #FDF7F0;   /* fundo dos cards */
+    --fundo:      #FFFFFF;
+    --texto:      #3A3340;
+    --texto-suave:#6B6470;
+    --raio: 20px;
     --largura: 1100px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    font-family: "Inter", system-ui, sans-serif;
-    color: var(--texto);
-    background: var(--fundo);
-    line-height: 1.6;
-  }
+  body { font-family: "Nunito", system-ui, sans-serif; color: var(--texto); background: var(--fundo); line-height: 1.65; overflow-x: hidden; }
   img { max-width: 100%; display: block; }
   a { color: inherit; }
   .container { max-width: var(--largura); margin: 0 auto; padding: 0 16px; }
-  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; color: var(--cor-escura); line-height: 1.15; }
-  h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: .6rem; }
-  .subtitulo { color: var(--texto-suave); max-width: 640px; margin-bottom: 2.5rem; }
-  section { padding: 80px 0; }
-  .alt { background: var(--cor-clara); }
+  h1, h2, h3 { font-family: "Fredoka", system-ui, sans-serif; color: var(--roxo); line-height: 1.15; }
+  h2 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; text-transform: uppercase; letter-spacing: .01em; }
+  .selo {
+    display: inline-block; background: var(--verde); color: #fff; font-family: "Fredoka", sans-serif;
+    font-weight: 500; font-size: 1rem; padding: 6px 20px; border-radius: 99px; margin: .8rem 0 1.4rem;
+  }
+  .centro { text-align: center; }
+  .subtitulo { color: var(--texto-suave); max-width: 640px; margin: 0 auto 2.5rem; font-size: 1.08rem; }
+  section { padding: 84px 0; position: relative; }
 
   /* ---------- Menu ---------- */
-  header {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(255,255,255,.95);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid #eee;
-  }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; color: var(--cor-escura); }
-  .marca img, .marca svg { height: 40px; width: auto; }
-  .links { display: flex; gap: 24px; list-style: none; }
-  .links a { text-decoration: none; font-weight: 500; color: var(--texto-suave); }
-  .links a:hover { color: var(--cor-principal); }
-  .menu-btn { display: none; background: none; border: 0; font-size: 1.6rem; cursor: pointer; color: var(--cor-escura); }
-
+  header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.95); backdrop-filter: blur(6px); border-bottom: 1px solid #f0ebe6; }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: "Fredoka", sans-serif; font-weight: 600; color: var(--roxo); font-size: 1.1rem; }
+  .marca img { height: 48px; width: auto; }
+  .links { display: flex; gap: 26px; list-style: none; }
+  .links a { text-decoration: none; font-weight: 600; color: var(--texto-suave); }
+  .links a:hover { color: var(--verde-esc); }
+  .menu-btn { display: none; background: none; border: 0; font-size: 1.7rem; cursor: pointer; color: var(--roxo); }
   @media (max-width: 760px) {
     .menu-btn { display: block; }
-    .links {
-      display: none; position: absolute; top: 68px; left: 0; right: 0;
-      flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid #eee;
-    }
+    .links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid #eee; }
     .links.aberto { display: flex; }
     .links a { display: block; padding: 14px 16px; }
   }
 
+  /* ---------- Manchas decorativas (como no material) ---------- */
+  .mancha { position: absolute; border-radius: 50%; z-index: 0; pointer-events: none; }
+  .mancha.v { background: var(--verde); opacity: .9; }
+  .mancha.l { background: var(--laranja); opacity: .85; }
+  section > .container { position: relative; z-index: 1; }
+
   /* ---------- Topo ---------- */
-  .hero { padding: 100px 0 90px; background: linear-gradient(160deg, var(--cor-clara) 0%, #fff 70%); }
-  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
-  .tag { display: inline-block; background: var(--cor-apoio); color: var(--cor-escura); font-size: .8rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 1rem; }
-  .hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); margin-bottom: 1rem; }
-  .hero h1 span { color: var(--cor-principal); }
-  .hero p { font-size: 1.15rem; color: var(--texto-suave); margin-bottom: 2rem; max-width: 520px; }
-  .botao {
-    display: inline-block; background: var(--cor-principal); color: #fff;
-    padding: 14px 26px; border-radius: 99px; text-decoration: none; font-weight: 600;
-    transition: transform .15s, box-shadow .15s;
-  }
-  .botao:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
-  .botao.secundario { background: transparent; color: var(--cor-escura); border: 2px solid var(--cor-escura); margin-left: 10px; }
-  .hero-img {
-    aspect-ratio: 1; border-radius: 50% 50% 50% 12%;
-    background: var(--cor-principal); display: grid; place-items: center; overflow: hidden;
-  }
-  .hero-img svg { width: 55%; fill: var(--cor-clara); }
+  .hero { padding: 90px 0 100px; overflow: hidden; }
+  .hero .m1 { width: 340px; height: 340px; top: -150px; left: -140px; }
+  .hero .m2 { width: 260px; height: 260px; top: -90px; right: -90px; }
+  .hero .m3 { width: 200px; height: 200px; bottom: -110px; right: 8%; opacity: .5; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+  .tag { display: inline-block; background: #E6F4F2; color: var(--verde-esc); font-size: .85rem; font-weight: 700; padding: 5px 14px; border-radius: 99px; margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(2.6rem, 7vw, 4.2rem); font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
+  .hero h1 span { color: var(--verde-esc); }
+  .hero p { font-size: 1.18rem; color: var(--texto-suave); margin-bottom: 2rem; max-width: 520px; }
+  .hero p strong { color: var(--roxo); }
+  .botao { display: inline-block; background: var(--verde); color: #fff; padding: 14px 28px; border-radius: 99px; text-decoration: none; font-weight: 700; transition: transform .15s, box-shadow .15s, background .15s; }
+  .botao:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(78,158,147,.3); background: var(--verde-esc); }
+  .botao.laranja { background: var(--laranja); margin-left: 20px; }
+  .botao.laranja:hover { background: #E8944A; box-shadow: 0 8px 20px rgba(245,169,98,.35); }
+  .hero-logo img { width: 100%; max-width: 420px; margin: 0 auto; }
   @media (max-width: 760px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-img { max-width: 260px; }
-    .botao.secundario { margin-left: 0; margin-top: 10px; }
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .hero p { margin-left: auto; margin-right: auto; }
+    .hero-logo { order: -1; }
+    .hero-logo img { max-width: 240px; }
+    .botao.laranja { margin-left: 0; margin-top: 28px; }
   }
 
-  /* ---------- Cards ---------- */
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-  .card {
-    background: #fff; border-radius: var(--raio); padding: 28px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.05); border: 1px solid #eee;
-  }
-  .card .icone { font-size: 2rem; margin-bottom: .6rem; }
-  .card h3 { font-size: 1.25rem; margin-bottom: .4rem; }
-  .card p { color: var(--texto-suave); }
+  /* ---------- Pilares ---------- */
+  .pilares { background: #fff; border: 2px solid #E6F4F2; border-radius: 28px; padding: 44px 28px 32px; position: relative; margin-top: 3rem; }
+  .pilares-titulo { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: var(--verde); color: #fff; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.1rem; padding: 6px 24px; border-radius: 99px; white-space: nowrap; letter-spacing: .04em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+  .pilar { background: var(--creme); border-radius: var(--raio); padding: 30px 24px; text-align: center; }
+  .pilar .icone { width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 1rem; display: grid; place-items: center; }
+  .pilar .icone svg { width: 42px; height: 42px; fill: #fff; }
+  .pilar .icone.v { background: var(--verde); }
+  .pilar .icone.l { background: var(--laranja); }
+  .pilar h3 { font-size: 1.35rem; font-weight: 600; }
+  .pilar h3::after { content: ""; display: block; width: 48px; height: 3px; background: var(--laranja); border-radius: 3px; margin: .7rem auto .9rem; }
+  .pilar p { color: var(--texto-suave); font-size: .98rem; }
+  .lema { margin-top: 28px; background: var(--creme); border-radius: 99px; padding: 16px 24px; text-align: center; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.15rem; color: var(--roxo); }
+  .lema span { color: var(--roxo); margin: 0 8px; }
 
-  /* Projetos realizados */
-  .projeto { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
-  .projeto .foto { aspect-ratio: 16/10; background: var(--cor-clara); display: grid; place-items: center; color: var(--texto-suave); font-size: .9rem; }
+  /* ---------- Projetos ---------- */
+  .alt { background: var(--creme); overflow: hidden; }
+  .alt .m4 { width: 260px; height: 260px; bottom: -130px; left: -100px; opacity: .35; }
+  .projeto { background: #fff; border-radius: var(--raio); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 18px rgba(59,40,64,.06); }
+  .projeto .foto { aspect-ratio: 16/10; background: #E6F4F2; display: grid; place-items: center; color: var(--verde-esc); font-weight: 600; }
   .projeto .foto img { width: 100%; height: 100%; object-fit: cover; }
-  .projeto .corpo { padding: 22px; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
-  .projeto .data { font-size: .8rem; font-weight: 600; color: var(--cor-principal); text-transform: uppercase; letter-spacing: .05em; }
-  .projeto .ver { margin-top: auto; padding-top: .6rem; font-weight: 600; color: var(--cor-principal); text-decoration: none; }
+  .projeto .corpo { padding: 24px; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+  .projeto .data { font-size: .8rem; font-weight: 700; color: var(--laranja); text-transform: uppercase; letter-spacing: .06em; }
+  .projeto h3 { font-size: 1.3rem; font-weight: 600; }
+  .projeto p { color: var(--texto-suave); font-size: .98rem; }
+  .projeto .hashtags { color: var(--verde-esc); font-size: .85rem; font-weight: 600; }
+  .projeto .ver { margin-top: auto; padding-top: .6rem; font-weight: 700; color: var(--verde-esc); text-decoration: none; }
   .projeto .ver:hover { text-decoration: underline; }
+  .galeria { position: relative; aspect-ratio: 16/10; background: #E6F4F2; }
+  .slides { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .slides::-webkit-scrollbar { display: none; }
+  .slides img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+  .seta { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(255,255,255,.9); color: var(--roxo); font-size: 1.4rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+  .seta.esq { left: 10px; } .seta.dir { right: 10px; }
+  .pontos { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; gap: 6px; justify-content: center; }
+  .pontos span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.6); transition: .2s; }
+  .pontos span.ativo { background: #fff; width: 20px; border-radius: 4px; }
+  .projeto.embreve { border: 2px dashed #D9EEEB; box-shadow: none; background: transparent; justify-content: center; align-items: center; text-align: center; padding: 40px 24px; }
+  .projeto.embreve p { max-width: 260px; }
 
-  /* Parcerias */
-  .parceiros { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-  .parceiro {
-    background: #fff; border-radius: var(--raio); border: 1px solid #eee;
-    height: 110px; display: grid; place-items: center; padding: 16px;
-    text-decoration: none; color: var(--texto-suave); font-weight: 600; text-align: center;
-    transition: border-color .15s;
-  }
-  .parceiro:hover { border-color: var(--cor-principal); }
-  .parceiro img { max-height: 70px; width: auto; filter: grayscale(1); opacity: .8; transition: .2s; }
-  .parceiro:hover img { filter: none; opacity: 1; }
+  /* ---------- Parcerias ---------- */
+  .parceiros { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
+  .parceiro { background: var(--creme); border-radius: var(--raio); width: 260px; padding: 28px 20px; text-align: center; text-decoration: none; border: 2px solid transparent; transition: border-color .15s, transform .15s; }
+  .parceiro:hover { border-color: var(--verde); transform: translateY(-2px); }
+  .parceiro .nome { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.3rem; color: var(--roxo); }
+  .parceiro .tipo { color: var(--texto-suave); font-size: .9rem; }
+  .parceiro img { max-height: 80px; margin: 0 auto .6rem; }
+  .parceiro.convite { background: transparent; border: 2px dashed var(--laranja); }
+  .parceiro.convite .nome { color: #D98536; }
 
-  /* Contato */
-  .contato { background: var(--cor-escura); color: #fff; text-align: center; }
+  /* ---------- Contato ---------- */
+  .contato { background: var(--verde); color: #fff; text-align: center; overflow: hidden; }
+  .contato .m5 { width: 300px; height: 300px; top: -150px; right: -100px; }
   .contato h2 { color: #fff; }
-  .contato .subtitulo { color: rgba(255,255,255,.75); margin-left: auto; margin-right: auto; }
+  .contato .subtitulo { color: rgba(255,255,255,.9); }
   .redes { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .redes a { border: 2px solid rgba(255,255,255,.4); padding: 10px 20px; border-radius: 99px; text-decoration: none; font-weight: 500; }
-  .redes a:hover { background: #fff; color: var(--cor-escura); }
+  .redes a { background: #fff; color: var(--roxo); padding: 13px 26px; border-radius: 99px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; transition: transform .15s; }
+  .redes a:hover { transform: translateY(-2px); }
+  .redes svg { width: 20px; height: 20px; }
 
-  footer { background: var(--cor-escura); color: rgba(255,255,255,.6); text-align: center; padding: 24px 16px; font-size: .85rem; border-top: 1px solid rgba(255,255,255,.1); }
+  footer { background: var(--roxo); color: rgba(255,255,255,.7); text-align: center; padding: 26px 16px; font-size: .9rem; }
 </style>
 </head>
 <body>
@@ -137,15 +155,12 @@
 <header>
   <nav class="container nav">
     <a href="#inicio" class="marca">
-      <!-- Troque este SVG pela logo: <img src="img/logo.png" alt="Pata na Consciência"> -->
-      <svg viewBox="0 0 100 100" fill="var(--cor-principal)" aria-hidden="true"><ellipse cx="50" cy="65" rx="22" ry="18"/><ellipse cx="22" cy="40" rx="9" ry="12"/><ellipse cx="40" cy="24" rx="9" ry="12"/><ellipse cx="60" cy="24" rx="9" ry="12"/><ellipse cx="78" cy="40" rx="9" ry="12"/></svg>
-      Pata na Consciência
+      <img src="img/logo.png" alt="Pata na Consciência">
     </a>
     <button class="menu-btn" aria-label="Abrir menu" onclick="document.querySelector('.links').classList.toggle('aberto')">☰</button>
     <ul class="links" onclick="this.classList.remove('aberto')">
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#acoes">O que fazemos</a></li>
-      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#sobre">Quem somos</a></li>
+      <li><a href="#projetos">O que fizemos</a></li>
       <li><a href="#parcerias">Parcerias</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
@@ -154,83 +169,90 @@
 
 <!-- ================= TOPO ================= -->
 <section class="hero" id="inicio">
+  <div class="mancha v m1"></div><div class="mancha l m2"></div><div class="mancha v m3"></div>
   <div class="container hero-grid">
     <div>
       <span class="tag">Projeto de Extensão · USP</span>
       <h1>Pata na <span>Consciência</span></h1>
-      <p>[Frase curta dizendo o propósito do projeto. Ex.: "Levamos informação e cuidado sobre bem-estar animal para a comunidade."]</p>
-      <a href="#projetos" class="botao">Ver nossos projetos</a>
-      <a href="#contato" class="botao secundario">Fale com a gente</a>
+      <p>Uma campanha pela proteção animal, com atenção especial aos <strong>gatos com deficiência</strong>.</p>
+      <a href="#sobre" class="botao">Conheça o projeto</a>
+      <a href="https://www.instagram.com/patanaconsciencia/" target="_blank" rel="noopener" class="botao laranja">Siga no Instagram</a>
     </div>
-    <div class="hero-img">
-      <!-- Pode trocar por uma foto da equipe: <img src="img/equipe.jpg" alt="Equipe"> -->
-      <svg viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="65" rx="22" ry="18"/><ellipse cx="22" cy="40" rx="9" ry="12"/><ellipse cx="40" cy="24" rx="9" ry="12"/><ellipse cx="60" cy="24" rx="9" ry="12"/><ellipse cx="78" cy="40" rx="9" ry="12"/></svg>
+    <div class="hero-logo">
+      <img src="img/logo.png" alt="Gato com bengala, mascote do Pata na Consciência">
     </div>
   </div>
 </section>
 
-<!-- ================= SOBRE ================= -->
+<!-- ================= QUEM SOMOS ================= -->
 <section id="sobre">
-  <div class="container">
+  <div class="container centro">
     <h2>Quem somos</h2>
-    <p class="subtitulo">[2–3 frases: quando o projeto começou, qual unidade da USP, quem participa e qual problema vocês querem resolver.]</p>
-    <div class="grid">
-      <div class="card"><div class="icone">🎯</div><h3>Missão</h3><p>[O que o projeto busca fazer.]</p></div>
-      <div class="card"><div class="icone">👥</div><h3>Equipe</h3><p>[Quantos alunos, quais cursos, professor(a) responsável.]</p></div>
-      <div class="card"><div class="icone">📍</div><h3>Onde atuamos</h3><p>[Campus, bairros, escolas, comunidades.]</p></div>
+    <span class="selo">Pata na Consciência</span>
+    <p class="subtitulo">
+      Somos uma campanha de conscientização dedicada à proteção animal, com atenção especial
+      aos <strong>gatos, especialmente os gatos com deficiência</strong>. Nosso propósito é incentivar a
+      adoção responsável, combater o abandono e dar mais visibilidade a iniciativas que transformam vidas.
+    </p>
+
+    <div class="pilares">
+      <div class="pilares-titulo">NOSSOS PILARES</div>
+      <div class="grid">
+        <div class="pilar">
+          <div class="icone v"><svg viewBox="0 0 24 24"><path d="M12 3 2 11h3v9h14v-9h3L12 3zm0 13.6-.7-.6C9 14 7.5 12.7 7.5 11.2c0-1.2.9-2.1 2.1-2.1.7 0 1.4.3 1.8.9h1.2c.4-.6 1.1-.9 1.8-.9 1.2 0 2.1.9 2.1 2.1 0 1.5-1.5 2.8-3.8 4.8l-.7.6z"/></svg></div>
+          <h3>Adoção responsável</h3>
+          <p>Incentivamos escolhas conscientes e lares seguros para os animais.</p>
+        </div>
+        <div class="pilar">
+          <div class="icone l"><svg viewBox="0 0 24 24"><path d="M9 21h6v-1H9v1zm3-19a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2zm0 4.2c.6 0 1 .6 1 1.2s-.4 1.2-1 1.2-1-.6-1-1.2.4-1.2 1-1.2zm-2.6 1.2c.5 0 .9.5.9 1.1s-.4 1.1-.9 1.1-.9-.5-.9-1.1.4-1.1.9-1.1zm5.2 0c.5 0 .9.5.9 1.1s-.4 1.1-.9 1.1-.9-.5-.9-1.1.4-1.1.9-1.1zM12 10c1.5 0 2.8 1.2 2.8 2.4 0 .8-.6 1.2-1.4 1.2-.6 0-.9-.3-1.4-.3s-.8.3-1.4.3c-.8 0-1.4-.4-1.4-1.2C9.2 11.2 10.5 10 12 10z"/></svg></div>
+          <h3>Conscientização</h3>
+          <p>Compartilhamos informações sobre cuidados, bem-estar e combate a preconceitos.</p>
+        </div>
+        <div class="pilar">
+          <div class="icone v"><svg viewBox="0 0 24 24"><path d="M12.2 5.3 9.5 8a1 1 0 0 0 0 1.4 1 1 0 0 0 1.4 0l2-2 4.4 4.4.8-.8a4 4 0 0 0 0-5.7 4 4 0 0 0-5.7 0l-.2-.2zM3.5 6.6a4 4 0 0 0 0 5.7L11 19.8a1.2 1.2 0 0 0 1.7 0 1.2 1.2 0 0 0 0-1.7l.6.6a1.2 1.2 0 0 0 1.7-1.7l.6.6a1.2 1.2 0 0 0 1.7-1.7l.3.3a1.2 1.2 0 0 0 1.7-1.7l-6.6-6.6-1.4 1.4a2.4 2.4 0 0 1-3.4-3.4L9.5 5a4 4 0 0 0-6 1.6z"/></svg></div>
+          <h3>Parcerias</h3>
+          <p>Fortalecemos ações com a ONG Amanimal e buscamos mais parcerias para ampliar nosso impacto.</p>
+        </div>
+      </div>
+      <div class="lema"><span>🐾</span>Mais empatia, cuidado e respeito por cada vida.<span>🐾</span></div>
     </div>
   </div>
 </section>
 
-<!-- ================= AÇÕES ================= -->
-<section id="acoes" class="alt">
+<!-- ================= O QUE FIZEMOS ================= -->
+<section id="projetos" class="alt">
+  <div class="mancha v m4"></div>
   <div class="container">
-    <h2>O que fazemos</h2>
-    <p class="subtitulo">[Resumo das frentes de atuação do projeto.]</p>
-    <div class="grid">
-      <div class="card"><div class="icone">📚</div><h3>[Frente 1]</h3><p>[Ex.: palestras e oficinas de conscientização.]</p></div>
-      <div class="card"><div class="icone">🐾</div><h3>[Frente 2]</h3><p>[Ex.: campanhas, mutirões, ações com ONGs.]</p></div>
-      <div class="card"><div class="icone">📢</div><h3>[Frente 3]</h3><p>[Ex.: produção de conteúdo e materiais educativos.]</p></div>
+    <div class="centro">
+      <h2>O que fizemos</h2>
+      <span class="selo">Nossas ações</span>
     </div>
-  </div>
-</section>
-
-<!-- ================= PROJETOS REALIZADOS ================= -->
-<section id="projetos">
-  <div class="container">
-    <h2>Projetos realizados</h2>
-    <p class="subtitulo">O que já fizemos — clique para ver mais.</p>
     <div class="grid">
 
-      <!-- Para adicionar um projeto, copie um bloco <article> inteiro e edite -->
-      <article class="card projeto">
-        <div class="foto">foto do projeto</div> <!-- ou: <div class="foto"><img src="img/projeto1.jpg" alt=""></div> -->
+      <!-- Para adicionar uma ação: copie um bloco <article class="projeto"> e edite -->
+      <article class="projeto">
+        <div class="galeria">
+          <div class="slides">
+            <img src="img/imagemvisita1.jpg" alt="Visita à Meu Novo Amigo — foto 1">
+            <img src="img/imagemvisita2.jpg" alt="Visita à Meu Novo Amigo — foto 2">
+            <img src="img/imagemvisita3.jpg" alt="Visita à Meu Novo Amigo — foto 3">
+          </div>
+          <button class="seta esq" aria-label="Foto anterior">‹</button>
+          <button class="seta dir" aria-label="Próxima foto">›</button>
+          <div class="pontos"></div>
+        </div>
         <div class="corpo">
-          <span class="data">[Mês / Ano]</span>
-          <h3>[Nome do projeto]</h3>
-          <p>[Descrição curta do que foi feito e o resultado.]</p>
-          <a class="ver" href="#" target="_blank" rel="noopener">Ver mais →</a>
+          <span class="data">Visita</span>
+          <h3>Conhecendo quem cuida</h3>
+          <p>Visitamos a Edna Lopes Camilo, da <a href="https://www.instagram.com/meunovoamigo.pet/" target="_blank" rel="noopener"><strong>Meu Novo Amigo</strong></a>, para conhecer seus gatinhos resgatados e a rotina de quem acolhe e cuida de gatos com deficiência todos os dias.</p>
+          <span class="hashtags">#GatosComDeficiencia #AdoçãoResponsável</span>
+          <a class="ver" href="https://www.instagram.com/p/DckCvlEEXkp/" target="_blank" rel="noopener">Ver no Instagram →</a>
         </div>
       </article>
 
-      <article class="card projeto">
-        <div class="foto">foto do projeto</div>
-        <div class="corpo">
-          <span class="data">[Mês / Ano]</span>
-          <h3>[Nome do projeto]</h3>
-          <p>[Descrição curta do que foi feito e o resultado.]</p>
-          <a class="ver" href="#" target="_blank" rel="noopener">Ver mais →</a>
-        </div>
-      </article>
-
-      <article class="card projeto">
-        <div class="foto">foto do projeto</div>
-        <div class="corpo">
-          <span class="data">[Mês / Ano]</span>
-          <h3>[Nome do projeto]</h3>
-          <p>[Descrição curta do que foi feito e o resultado.]</p>
-          <a class="ver" href="#" target="_blank" rel="noopener">Ver mais →</a>
-        </div>
+      <article class="projeto embreve">
+        <h3>Vem mais por aí</h3>
+        <p>Histórias de vida dos felinos e dicas essenciais de cuidados. Acompanhe no Instagram!</p>
       </article>
 
     </div>
@@ -238,29 +260,36 @@
 </section>
 
 <!-- ================= PARCERIAS ================= -->
-<section id="parcerias" class="alt">
-  <div class="container">
+<section id="parcerias">
+  <div class="container centro">
     <h2>Parcerias</h2>
-    <p class="subtitulo">Instituições que caminham com a gente.</p>
+    <span class="selo">Juntos por cada vida</span>
+    <p class="subtitulo">Quem caminha com a gente nessa causa.</p>
     <div class="parceiros">
-      <!-- Troque o texto por: <img src="img/parceiro1.png" alt="Nome do parceiro"> -->
-      <a class="parceiro" href="#" target="_blank" rel="noopener">[Parceiro 1]</a>
-      <a class="parceiro" href="#" target="_blank" rel="noopener">[Parceiro 2]</a>
-      <a class="parceiro" href="#" target="_blank" rel="noopener">[Parceiro 3]</a>
-      <a class="parceiro" href="#" target="_blank" rel="noopener">[Parceiro 4]</a>
+      <a class="parceiro" href="https://www.instagram.com/amanimal.adote/" target="_blank" rel="noopener">
+        <!-- <img src="img/amanimal.png" alt="Amanimal"> -->
+        <div class="nome">Amanimal</div>
+        <div class="tipo">ONG de proteção animal</div>
+      </a>
+      <a class="parceiro convite" href="https://www.instagram.com/patanaconsciencia/" target="_blank" rel="noopener">
+        <div class="nome">Seja parceiro</div>
+        <div class="tipo">Fale com a gente pelo Instagram</div>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ================= CONTATO ================= -->
 <section id="contato" class="contato">
+  <div class="mancha l m5"></div>
   <div class="container">
     <h2>Fale com a gente</h2>
-    <p class="subtitulo">Quer ser parceiro, participar ou levar o projeto até você? Chama a gente.</p>
+    <p class="subtitulo">Quer ajudar, indicar uma história ou fazer parceria? Manda uma mensagem!</p>
     <div class="redes">
-      <a href="mailto:[email@usp.br]">E-mail</a>
-      <a href="https://instagram.com/[usuario]" target="_blank" rel="noopener">Instagram</a>
-      <a href="#" target="_blank" rel="noopener">Quero participar</a> <!-- link de um Google Forms -->
+      <a href="https://www.instagram.com/patanaconsciencia/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        @patanaconsciencia
+      </a>
     </div>
   </div>
 </section>
@@ -269,6 +298,23 @@
   Pata na Consciência · Projeto de Extensão da Universidade de São Paulo · <span id="ano"></span>
 </footer>
 
-<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('ano').textContent = new Date().getFullYear();
+
+// Galerias de fotos (funciona para qualquer .galeria da página)
+document.querySelectorAll('.galeria').forEach(g => {
+  const slides = g.querySelector('.slides');
+  const total = slides.children.length;
+  const pontos = g.querySelector('.pontos');
+  for (let i = 0; i < total; i++) pontos.appendChild(document.createElement('span'));
+  const atual = () => Math.round(slides.scrollLeft / slides.clientWidth);
+  const marcar = () => [...pontos.children].forEach((p, i) => p.classList.toggle('ativo', i === atual()));
+  const ir = i => slides.scrollTo({ left: ((i + total) % total) * slides.clientWidth, behavior: 'smooth' });
+  g.querySelector('.esq').onclick = () => ir(atual() - 1);
+  g.querySelector('.dir').onclick = () => ir(atual() + 1);
+  slides.addEventListener('scroll', marcar);
+  marcar();
+});
+</script>
 </body>
 </html>
