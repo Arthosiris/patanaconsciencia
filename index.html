@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pata na Consciência</title>
+<meta name="description" content="Projeto de extensão da USP — Pata na Consciência.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     CORES DO PROJETO — troque só aqui pelas cores oficiais
+     ========================================================= */
+  :root {
+    --cor-principal: #C8553D;   /* cor de destaque (botões, títulos) */
+    --cor-escura:    #2E3A2F;   /* textos fortes, rodapé */
+    --cor-clara:     #F7F1E8;   /* fundo das seções alternadas */
+    --cor-apoio:     #E9B44C;   /* detalhes */
+    --fundo:         #FFFFFF;
+    --texto:         #2B2B2B;
+    --texto-suave:   #5F5F5F;
+    --raio: 14px;
+    --largura: 1100px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--texto);
+    background: var(--fundo);
+    line-height: 1.6;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .container { max-width: var(--largura); margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; color: var(--cor-escura); line-height: 1.15; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: .6rem; }
+  .subtitulo { color: var(--texto-suave); max-width: 640px; margin-bottom: 2.5rem; }
+  section { padding: 80px 0; }
+  .alt { background: var(--cor-clara); }
+
+  /* ---------- Menu ---------- */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid #eee;
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; color: var(--cor-escura); }
+  .marca img, .marca svg { height: 40px; width: auto; }
+  .links { display: flex; gap: 24px; list-style: none; }
+  .links a { text-decoration: none; font-weight: 500; color: var(--texto-suave); }
+  .links a:hover { color: var(--cor-principal); }
+  .menu-btn { display: none; background: none; border: 0; font-size: 1.6rem; cursor: pointer; color: var(--cor-escura); }
+
+  @media (max-width: 760px) {
+    .menu-btn { display: block; }
+    .links {
+      display: none; position: absolute; top: 68px; left: 0; right: 0;
+      flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid #eee;
+    }
+    .links.aberto { display: flex; }
+    .links a { display: block; padding: 14px 16px; }
+  }
+
+  /* ---------- Topo ---------- */
+  .hero { padding: 100px 0 90px; background: linear-gradient(160deg, var(--cor-clara) 0%, #fff 70%); }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+  .tag { display: inline-block; background: var(--cor-apoio); color: var(--cor-escura); font-size: .8rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); margin-bottom: 1rem; }
+  .hero h1 span { color: var(--cor-principal); }
+  .hero p { font-size: 1.15rem; color: var(--texto-suave); margin-bottom: 2rem; max-width: 520px; }
+  .botao {
+    display: inline-block; background: var(--cor-principal); color: #fff;
+    padding: 14px 26px; border-radius: 99px; text-decoration: none; font-weight: 600;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .botao:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+  .botao.secundario { background: transparent; color: var(--cor-escura); border: 2px solid var(--cor-escura); margin-left: 10px; }
+  .hero-img {
+    aspect-ratio: 1; border-radius: 50% 50% 50% 12%;
+    background: var(--cor-principal); display: grid; place-items: center; overflow: hidden;
+  }
+  .hero-img svg { width: 55%; fill: var(--cor-clara); }
+  @media (max-width: 760px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-img { max-width: 260px; }
+    .botao.secundario { margin-left: 0; margin-top: 10px; }
+  }
+
+  /* ---------- Cards ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .card {
+    background: #fff; border-radius: var(--raio); padding: 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05); border: 1px solid #eee;
+  }
+  .card .icone { font-size: 2rem; margin-bottom: .6rem; }
+  .card h3 { font-size: 1.25rem; margin-bottom: .4rem; }
+  .card p { color: var(--texto-suave); }
+
+  /* Projetos realizados */
+  .projeto { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+  .projeto .foto { aspect-ratio: 16/10; background: var(--cor-clara); display: grid; place-items: center; color: var(--texto-suave); font-size: .9rem; }
+  .projeto .foto img { width: 100%; height: 100%; object-fit: cover; }
+  .projeto .corpo { padding: 22px; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
+  .projeto .data { font-size: .8rem; font-weight: 600; color: var(--cor-principal); text-transform: uppercase; letter-spacing: .05em; }
+  .projeto .ver { margin-top: auto; padding-top: .6rem; font-weight: 600; color: var(--cor-principal); text-decoration: none; }
+  .projeto .ver:hover { text-decoration: underline; }
+
+  /* Parcerias */
+  .parceiros { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+  .parceiro {
+    background: #fff; border-radius: var(--raio); border: 1px solid #eee;
+    height: 110px; display: grid; place-items: center; padding: 16px;
+    text-decoration: none; color: var(--texto-suave); font-weight: 600; text-align: center;
+    transition: border-color .15s;
+  }
+  .parceiro:hover { border-color: var(--cor-principal); }
+  .parceiro img { max-height: 70px; width: auto; filter: grayscale(1); opacity: .8; transition: .2s; }
+  .parceiro:hover img { filter: none; opacity: 1; }
+
+  /* Contato */
+  .contato { background: var(--cor-escura); color: #fff; text-align: center; }
+  .contato h2 { color: #fff; }
+  .contato .subtitulo { color: rgba(255,255,255,.75); margin-left: auto; margin-right: auto; }
+  .redes { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .redes a { border: 2px solid rgba(255,255,255,.4); padding: 10px 20px; border-radius: 99px; text-decoration: none; font-weight: 500; }
+  .redes a:hover { background: #fff; color: var(--cor-escura); }
+
+  footer { background: var(--cor-escura); color: rgba(255,255,255,.6); text-align: center; padding: 24px 16px; font-size: .85rem; border-top: 1px solid rgba(255,255,255,.1); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container nav">
+    <a href="#inicio" class="marca">
+      <!-- Troque este SVG pela logo: <img src="img/logo.png" alt="Pata na Consciência"> -->
+      <svg viewBox="0 0 100 100" fill="var(--cor-principal)" aria-hidden="true"><ellipse cx="50" cy="65" rx="22" ry="18"/><ellipse cx="22" cy="40" rx="9" ry="12"/><ellipse cx="40" cy="24" rx="9" ry="12"/><ellipse cx="60" cy="24" rx="9" ry="12"/><ellipse cx="78" cy="40" rx="9" ry="12"/></svg>
+      Pata na Consciência
+    </a>
+    <button class="menu-btn" aria-label="Abrir menu" onclick="document.querySelector('.links').classList.toggle('aberto')">☰</button>
+    <ul class="links" onclick="this.classList.remove('aberto')">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#acoes">O que fazemos</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#parcerias">Parcerias</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= TOPO ================= -->
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <span class="tag">Projeto de Extensão · USP</span>
+      <h1>Pata na <span>Consciência</span></h1>
+      <p>[Frase curta dizendo o propósito do projeto. Ex.: "Levamos informação e cuidado sobre bem-estar animal para a comunidade."]</p>
+      <a href="#projetos" class="botao">Ver nossos projetos</a>
+      <a href="#contato" class="botao secundario">Fale com a gente</a>
+    </div>
+    <div class="hero-img">
+      <!-- Pode trocar por uma foto da equipe: <img src="img/equipe.jpg" alt="Equipe"> -->
+      <svg viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="65" rx="22" ry="18"/><ellipse cx="22" cy="40" rx="9" ry="12"/><ellipse cx="40" cy="24" rx="9" ry="12"/><ellipse cx="60" cy="24" rx="9" ry="12"/><ellipse cx="78" cy="40" rx="9" ry="12"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SOBRE ================= -->
+<section id="sobre">
+  <div class="container">
+    <h2>Quem somos</h2>
+    <p class="subtitulo">[2–3 frases: quando o projeto começou, qual unidade da USP, quem participa e qual problema vocês querem resolver.]</p>
+    <div class="grid">
+      <div class="card"><div class="icone">🎯</div><h3>Missão</h3><p>[O que o projeto busca fazer.]</p></div>
+      <div class="card"><div class="icone">👥</div><h3>Equipe</h3><p>[Quantos alunos, quais cursos, professor(a) responsável.]</p></div>
+      <div class="card"><div class="icone">📍</div><h3>Onde atuamos</h3><p>[Campus, bairros, escolas, comunidades.]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AÇÕES ================= -->
+<section id="acoes" class="alt">
+  <div class="container">
+    <h2>O que fazemos</h2>
+    <p class="subtitulo">[Resumo das frentes de atuação do projeto.]</p>
+    <div class="grid">
+      <div class="card"><div class="icone">📚</div><h3>[Frente 1]</h3><p>[Ex.: palestras e oficinas de conscientização.]</p></div>
+      <div class="card"><div class="icone">🐾</div><h3>[Frente 2]</h3><p>[Ex.: campanhas, mutirões, ações com ONGs.]</p></div>
+      <div class="card"><div class="icone">📢</div><h3>[Frente 3]</h3><p>[Ex.: produção de conteúdo e materiais educativos.]</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJETOS REALIZADOS ================= -->
+<section id="projetos">
+  <div class="container">
+    <h2>Projetos realizados</h2>
+    <p class="subtitulo">O que já fizemos — clique para ver mais.</p>
+    <div class="grid">
+
+      <!-- Para adicionar um projeto, copie um bloco <article> inteiro e edite -->
+      <article class="card projeto">
+        <div class="foto">foto do projeto</div> <!-- ou: <div class="foto"><img src="img/projeto1.jpg" alt=""></div> -->
+        <div class="corpo">
+          <span class="data">[Mês / Ano]</span>
+          <h3>[Nome do projeto]</h3>
+          <p>[Descrição curta do que foi feito e o resultado.]</p>
+          <a class="ver" href="#" target="_blank" rel="noopener">Ver mais →</a>
+        </div>
+      </article>
+
+      <article class="card projeto">
+        <div class="foto">foto do projeto</div>
+        <div class="corpo">
+          <span class="data">[Mês / Ano]</span>
+          <h3>[Nome do projeto]</h3>
+          <p>[Descrição curta do que foi feito e o resultado.]</p>
+          <a class="ver" href="#" target="_blank" rel="noopener">Ver mais →</a>
+        </div>
+      </article>
+
+      <article class="card projeto">
+        <div class="foto">foto do projeto</div>
+        <div class="corpo">
+          <span class="data">[Mês / Ano]</span>
+          <h3>[Nome do projeto]</h3>
+          <p>[Descrição curta do que foi feito e o resultado.]</p>
+          <a class="ver" href="#" target="_blank" rel="noopener">Ver mais →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARCERIAS ================= -->
+<section id="parcerias" class="alt">
+  <div class="container">
+    <h2>Parcerias</h2>
+    <p class="subtitulo">Instituições que caminham com a gente.</p>
+    <div class="parceiros">
+      <!-- Troque o texto por: <img src="img/parceiro1.png" alt="Nome do parceiro"> -->
+      <a class="parceiro" href="#" target="_blank" rel="noopener">[Parceiro 1]</a>
+      <a class="parceiro" href="#" target="_blank" rel="noopener">[Parceiro 2]</a>
+      <a class="parceiro" href="#" target="_blank" rel="noopener">[Parceiro 3]</a>
+      <a class="parceiro" href="#" target="_blank" rel="noopener">[Parceiro 4]</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTATO ================= -->
+<section id="contato" class="contato">
+  <div class="container">
+    <h2>Fale com a gente</h2>
+    <p class="subtitulo">Quer ser parceiro, participar ou levar o projeto até você? Chama a gente.</p>
+    <div class="redes">
+      <a href="mailto:[email@usp.br]">E-mail</a>
+      <a href="https://instagram.com/[usuario]" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">Quero participar</a> <!-- link de um Google Forms -->
+    </div>
+  </div>
+</section>
+
+<footer>
+  Pata na Consciência · Projeto de Extensão da Universidade de São Paulo · <span id="ano"></span>
+</footer>
+
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>
