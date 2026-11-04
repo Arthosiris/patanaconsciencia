@@ -21,7 +21,9 @@
     --fundo:      #FFFFFF;
     --texto:      #3A3340;
     --texto-suave:#6B6470;
-    --raio: 20px;
+    --raio: 0;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --largura: 1100px;
   }
 
@@ -29,13 +31,15 @@
   html { scroll-behavior: smooth; }
   body { font-family: "Nunito", system-ui, sans-serif; color: var(--texto); background: var(--fundo); line-height: 1.65; overflow-x: hidden; }
   img { max-width: 100%; display: block; }
+  ::selection { background: #F5A96255; color: var(--roxo); }
+  :focus-visible { outline: 3px solid var(--laranja); outline-offset: 3px;  }
   a { color: inherit; }
   .container { max-width: var(--largura); margin: 0 auto; padding: 0 16px; }
   h1, h2, h3 { font-family: "Fredoka", system-ui, sans-serif; color: var(--roxo); line-height: 1.15; }
   h2 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; text-transform: uppercase; letter-spacing: .01em; }
   .selo {
     display: inline-block; background: var(--verde); color: #fff; font-family: "Fredoka", sans-serif;
-    font-weight: 500; font-size: 1rem; padding: 6px 20px; border-radius: 99px; margin: .8rem 0 1.4rem;
+    font-weight: 500; font-size: 1rem; padding: 6px 20px;  margin: .8rem 0 1.4rem;
   }
   .centro { text-align: center; }
   .subtitulo { color: var(--texto-suave); max-width: 640px; margin: 0 auto 2.5rem; font-size: 1.08rem; }
@@ -45,15 +49,18 @@
   header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.95); backdrop-filter: blur(6px); border-bottom: 1px solid #f0ebe6; }
   .nav { display: flex; align-items: center; justify-content: space-between; height: 88px; }
   .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: "Fredoka", sans-serif; font-weight: 600; color: var(--roxo); font-size: 1.1rem; }
-  .marca img { height: 76px; width: auto; border-radius: 10px; }
+  .marca img { height: 76px; width: auto;  }
   .links { display: flex; gap: 26px; list-style: none; }
-  .links a { text-decoration: none; font-weight: 600; color: var(--texto-suave); }
+  .links a { text-decoration: none; font-weight: 600; color: var(--texto-suave); transition: color 150ms ease; }
   .links a:hover { color: var(--verde-esc); }
   .menu-btn { display: none; background: none; border: 0; font-size: 1.7rem; cursor: pointer; color: var(--roxo); }
   @media (max-width: 760px) {
     .menu-btn { display: block; }
-    .links { display: none; position: absolute; top: 88px; left: 0; right: 0; flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid #eee; }
-    .links.aberto { display: flex; }
+    .links { display: flex; position: absolute; top: 88px; left: 0; right: 0; flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid #eee;
+             opacity: 0; transform: translateY(-8px); visibility: hidden; pointer-events: none;
+             transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s linear 200ms; }
+    .links.aberto { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto;
+                    transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s; }
     .links a { display: block; padding: 14px 16px; }
   }
 
@@ -67,50 +74,49 @@
   .hero { padding: 90px 0 100px; overflow: hidden; }
   .hero .m1 { width: 340px; height: 340px; top: -150px; left: -140px; }
   .hero .m2 { width: 260px; height: 260px; top: -90px; right: -90px; }
-  .hero .m3 { width: 200px; height: 200px; bottom: -110px; right: 8%; opacity: .5; }
   .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
-  .tag { display: inline-block; background: #E6F4F2; color: var(--verde-esc); font-size: 1.05rem; font-weight: 700; padding: 8px 18px; border-radius: 99px; margin-bottom: 1rem; }
+  .tag { display: inline-block; background: #E6F4F2; color: var(--verde-esc); font-size: 1.05rem; font-weight: 700; padding: 8px 18px;  margin-bottom: 1rem; }
   .tag.laranja { background: #FDEBD9; color: #C9742B; }
   .selo-aex { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 1rem; }
-  .selo-aex img { height: 42px; width: auto; border-radius: 10px}
+  .selo-aex img { height: 56px; width: auto; }
   .selo-aex .tag { margin-bottom: 0; }
-  .hero h1 { font-size: clamp(2.6rem, 7vw, 4.2rem); font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(2.2rem, 7vw, 4.2rem); font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
   .hero h1 span { color: var(--verde-esc); }
   .hero p { font-size: 1.18rem; color: var(--texto-suave); margin-bottom: 2rem; max-width: 520px; }
   .hero p strong { color: var(--roxo); }
-  .botao { display: inline-block; background: var(--verde); color: #fff; padding: 14px 28px; border-radius: 99px; text-decoration: none; font-weight: 700; transition: transform .15s, box-shadow .15s, background .15s; }
-  .botao:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(78,158,147,.3); background: var(--verde-esc); }
+  .botao { display: inline-block; background: var(--verde); color: #fff; padding: 14px 28px;  text-decoration: none; font-weight: 700;
+           transition: transform 160ms var(--ease-out), box-shadow 200ms ease, background-color 200ms ease; }
+  .botao:active { transform: scale(0.97); }
   .botao.laranja { background: var(--laranja); margin-left: 20px; }
-  .botao.laranja:hover { background: #E8944A; box-shadow: 0 8px 20px rgba(245,169,98,.35); }
-  .hero-logo img { width: 100%; max-width: 420px; margin: 0 auto; border-radius: 32px; }
+
+  .hero-logo img { width: 100%; max-width: 420px; margin: 0 auto;  }
   @media (max-width: 760px) {
     .hero-grid { grid-template-columns: 1fr; text-align: center; }
     .hero p { margin-left: auto; margin-right: auto; }
     .selo-aex { justify-content: center; }
-    .hero-logo { order: -1; }
-    .hero-logo img { max-width: 240px; }
+    .hero-logo img { max-width: 160px; margin-top: 2rem; }
     .botao.laranja { margin-left: 0; margin-top: 28px; }
   }
 
   /* ---------- Pilares ---------- */
-  .pilares { background: #fff; border: 2px solid #E6F4F2; border-radius: 28px; padding: 44px 28px 32px; position: relative; margin-top: 3rem; }
-  .pilares-titulo { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: var(--verde); color: #fff; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.1rem; padding: 6px 24px; border-radius: 99px; white-space: nowrap; letter-spacing: .04em; }
+  .pilares { background: #fff; border: 2px solid #E6F4F2;  padding: 44px 28px 32px; position: relative; margin-top: 3rem; }
+  .pilares-titulo { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: var(--verde); color: #fff; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.1rem; padding: 6px 24px;  white-space: nowrap; letter-spacing: .04em; }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
-  .pilar { background: var(--creme); border-radius: var(--raio); padding: 30px 24px; text-align: center; }
+  .pilar { background: var(--creme);  padding: 30px 24px; text-align: center; }
   .pilar .icone { width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 1rem; display: grid; place-items: center; }
   .pilar .icone svg { width: 42px; height: 42px; fill: #fff; }
   .pilar .icone.v { background: var(--verde); }
   .pilar .icone.l { background: var(--laranja); }
   .pilar h3 { font-size: 1.35rem; font-weight: 600; }
-  .pilar h3::after { content: ""; display: block; width: 48px; height: 3px; background: var(--laranja); border-radius: 3px; margin: .7rem auto .9rem; }
+  .pilar h3::after { content: ""; display: block; width: 48px; height: 3px; background: var(--laranja);  margin: .7rem auto .9rem; }
   .pilar p { color: var(--texto-suave); font-size: .98rem; }
-  .lema { margin-top: 28px; background: var(--creme); border-radius: 99px; padding: 16px 24px; text-align: center; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.15rem; color: var(--roxo); }
+  .lema { margin-top: 28px; background: var(--creme);  padding: 16px 24px; text-align: center; font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.15rem; color: var(--roxo); }
   .lema span { color: var(--roxo); margin: 0 8px; }
 
   /* ---------- Projetos ---------- */
   .alt { background: var(--creme); overflow: hidden; }
   .alt .m4 { width: 260px; height: 260px; bottom: -130px; left: -100px; opacity: .35; }
-  .projeto { background: #fff; border-radius: var(--raio); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 18px rgba(59,40,64,.06); }
+  .projeto { background: #fff;  overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 18px rgba(59,40,64,.06); }
   .projeto .foto { aspect-ratio: 16/10; background: #E6F4F2; display: grid; place-items: center; color: var(--verde-esc); font-weight: 600; }
   .projeto .foto img { width: 100%; height: 100%; object-fit: cover; }
   .projeto .corpo { padding: 24px; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
@@ -124,21 +130,26 @@
   .slides { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .slides::-webkit-scrollbar { display: none; }
   .slides img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
-  .seta { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(255,255,255,.9); color: var(--roxo); font-size: 1.4rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+  .seta { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.9); color: var(--roxo); font-size: 1.4rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
   .seta.esq { left: 10px; } .seta.dir { right: 10px; }
+  .seta { transition: transform 160ms var(--ease-out), background-color 150ms ease; }
+  .seta:active { transform: translateY(-50%) scale(0.92); }
   .pontos { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; gap: 6px; justify-content: center; }
-  .pontos span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.6); transition: .2s; }
+  .pontos span { width: 8px; height: 8px; border-radius: 99px; background: rgba(255,255,255,.6); transition: width 250ms var(--ease-out), background-color 200ms ease; }
   .pontos span.ativo { background: #fff; width: 20px; border-radius: 4px; }
-  .projeto.embreve { border: 2px dashed #D9EEEB; box-shadow: none; background: transparent; justify-content: center; align-items: center; text-align: center; padding: 40px 24px; }
-  .projeto.embreve p { max-width: 260px; }
+  #projetos .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 420px)); justify-content: center; }
+  .mais-acoes { text-align: center; margin-top: 2rem; color: var(--texto-suave); }
+  .mais-acoes a { color: var(--verde-esc); font-weight: 700; }
 
   /* ---------- Parcerias ---------- */
   .parceiros { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; }
-  .parceiro { background: var(--creme); border-radius: var(--raio); width: 260px; padding: 28px 20px; text-align: center; text-decoration: none; border: 2px solid transparent; transition: border-color .15s, transform .15s; }
-  .parceiro:hover { border-color: var(--verde); transform: translateY(-2px); }
+  .parceiro { background: var(--creme);  width: 260px; padding: 28px 20px; text-align: center; text-decoration: none; border: 2px solid transparent;
+              transition: border-color 200ms ease, transform 160ms var(--ease-out); }
+  .parceiro:active { transform: scale(0.98); }
   .parceiro .nome { font-family: "Fredoka", sans-serif; font-weight: 600; font-size: 1.3rem; color: var(--roxo); }
   .parceiro .tipo { color: var(--texto-suave); font-size: .9rem; }
   .parceiro .logo-parceiro { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin: 0 auto .7rem; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .parceiro .link-parceiro { margin-top: .6rem; font-weight: 700; font-size: .9rem; color: var(--verde-esc); }
   .parceiro.convite { background: transparent; border: 2px dashed var(--laranja); }
   .parceiro.convite .nome { color: #D98536; }
 
@@ -148,8 +159,35 @@
   .contato h2 { color: #fff; }
   .contato .subtitulo { color: rgba(255,255,255,.9); }
   .redes { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .redes a { background: #fff; color: var(--roxo); padding: 13px 26px; border-radius: 99px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; transition: transform .15s; }
-  .redes a:hover { transform: translateY(-2px); }
+  .redes a { background: #fff; color: var(--roxo); padding: 13px 26px;  text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;
+             transition: transform 160ms var(--ease-out), box-shadow 200ms ease; }
+  .redes a:active { transform: scale(0.97); }
+
+  /* Hover só em quem tem mouse (no celular o toque disparava o hover e ele ficava preso) */
+  @media (hover: hover) and (pointer: fine) {
+    .botao:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(78,158,147,.3); background-color: var(--verde-esc); }
+    .botao.laranja:hover { background-color: #E8944A; box-shadow: 0 8px 20px rgba(245,169,98,.35); }
+    .botao:hover:active, .redes a:hover:active { transform: scale(0.97); }
+    .parceiro:hover { border-color: var(--verde); transform: translateY(-2px); }
+    .redes a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+    .seta:hover { background-color: #fff; }
+  }
+
+  /* Entrada do topo: única animação de "chegada", só na primeira vista */
+  @keyframes entrar { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .hero-grid > div > *, .hero-logo { animation: entrar 600ms var(--ease-out) both; }
+  .hero-grid > div > *:nth-child(2) { animation-delay: 60ms; }
+  .hero-grid > div > *:nth-child(3) { animation-delay: 120ms; }
+  .hero-grid > div > *:nth-child(n+4) { animation-delay: 180ms; }
+  .hero-logo { animation-delay: 120ms; }
+
+  /* Quem pede menos movimento no sistema: sem deslocamentos, só o essencial */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero-grid > div > *, .hero-logo { animation: none; }
+    .botao, .parceiro, .redes a, .seta, .links { transition-property: opacity, background-color, border-color, box-shadow; }
+    .botao:active, .parceiro:active, .redes a:active { transform: none; }
+  }
   .redes svg { width: 20px; height: 20px; }
 
   footer { background: var(--roxo); color: rgba(255,255,255,.7); text-align: center; padding: 26px 16px; font-size: .9rem; }
@@ -162,8 +200,8 @@
     <a href="#inicio" class="marca">
       <img src="img/logo.jpg" alt="Pata na Consciência">
     </a>
-    <button class="menu-btn" aria-label="Abrir menu" onclick="document.querySelector('.links').classList.toggle('aberto')">☰</button>
-    <ul class="links" onclick="this.classList.remove('aberto')">
+    <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', document.querySelector('.links').classList.toggle('aberto'))">☰</button>
+    <ul class="links" onclick="this.classList.remove('aberto'); document.querySelector('.menu-btn').setAttribute('aria-expanded','false')">
       <li><a href="#sobre">Quem somos</a></li>
       <li><a href="#projetos">O que fizemos</a></li>
       <li><a href="#parcerias">Parcerias</a></li>
@@ -174,13 +212,12 @@
 
 <!-- ================= TOPO ================= -->
 <section class="hero" id="inicio">
-  <div class="mancha v m1"></div><div class="mancha l m2"></div><div class="mancha v m3"></div>
+  <div class="mancha v m1"></div><div class="mancha l m2"></div>
   <div class="container hero-grid">
     <div>
       <div class="selo-aex">
         <img src="img/aex.jpg" alt="Logo AEX" onerror="this.style.display='none'">
         <span class="tag">Projeto de Extensão · USP</span>
-        <span class="tag laranja">Ame mais animais</span>
       </div>
       <h1>Pata na <span>Consciência</span></h1>
       <p>Uma campanha pela proteção animal, com atenção especial aos <strong>gatos com deficiência</strong>.</p>
@@ -196,8 +233,7 @@
 <!-- ================= QUEM SOMOS ================= -->
 <section id="sobre">
   <div class="container centro">
-    <h2>Quem somos</h2>
-    <span class="selo">Pata na Consciência</span>
+    <h2 style="margin-bottom: 1.2rem">Quem somos</h2>
     <p class="subtitulo">
       Somos uma campanha de conscientização dedicada à proteção animal, com atenção especial
       aos <strong>gatos, especialmente os gatos com deficiência</strong>. Nosso propósito é incentivar a
@@ -242,9 +278,9 @@
       <article class="projeto">
         <div class="galeria">
           <div class="slides">
-            <img src="img/imagemvisita1.jpg" alt="Visita à Meu Novo Amigo — foto 1">
-            <img src="img/imagemvisita2.jpg" alt="Visita à Meu Novo Amigo — foto 2">
-            <img src="img/imagemvisita3.jpg" alt="Visita à Meu Novo Amigo — foto 3">
+            <img src="img/imagemvisita1.jpg" alt="Visita à Meu Novo Amigo — foto 1" onerror="this.remove()">
+            <img src="img/imagemvisita2.jpg" alt="Visita à Meu Novo Amigo — foto 2" onerror="this.remove()">
+            <img src="img/imagemvisita3.jpg" alt="Visita à Meu Novo Amigo — foto 3" onerror="this.remove()">
           </div>
           <button class="seta esq" aria-label="Foto anterior">‹</button>
           <button class="seta dir" aria-label="Próxima foto">›</button>
@@ -259,12 +295,8 @@
         </div>
       </article>
 
-      <article class="projeto embreve">
-        <h3>Vem mais por aí</h3>
-        <p>Histórias de vida dos felinos e dicas essenciais de cuidados. Acompanhe no Instagram!</p>
-      </article>
-
     </div>
+    <p class="mais-acoes">Mais histórias chegando. Acompanhe no <a href="https://www.instagram.com/patanaconsciencia/" target="_blank" rel="noopener">@patanaconsciencia</a></p>
   </div>
 </section>
 
@@ -278,7 +310,8 @@
       <a class="parceiro" href="https://www.instagram.com/amanimal.adote/" target="_blank" rel="noopener">
         <img class="logo-parceiro" src="img/amanimal.jpg" alt="Logo da Amanimal" onerror="this.style.display='none'">
         <div class="nome">Amanimal</div>
-        <div class="tipo">ONG de proteção animal</div>
+        <div class="tipo">Parceira nas nossas ações de adoção</div>
+        <div class="link-parceiro">Ver no Instagram →</div>
       </a>
       <a class="parceiro convite" href="https://www.instagram.com/patanaconsciencia/" target="_blank" rel="noopener">
         <div class="nome">Seja parceiro</div>
@@ -318,7 +351,8 @@ document.querySelectorAll('.galeria').forEach(g => {
   for (let i = 0; i < total; i++) pontos.appendChild(document.createElement('span'));
   const atual = () => Math.round(slides.scrollLeft / slides.clientWidth);
   const marcar = () => [...pontos.children].forEach((p, i) => p.classList.toggle('ativo', i === atual()));
-  const ir = i => slides.scrollTo({ left: ((i + total) % total) * slides.clientWidth, behavior: 'smooth' });
+  const suave = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ir = i => slides.scrollTo({ left: ((i + total) % total) * slides.clientWidth, behavior: suave ? 'smooth' : 'auto' });
   g.querySelector('.esq').onclick = () => ir(atual() - 1);
   g.querySelector('.dir').onclick = () => ir(atual() + 1);
   slides.addEventListener('scroll', marcar);
