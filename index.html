@@ -43,16 +43,16 @@
 
   /* ---------- Menu ---------- */
   header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.95); backdrop-filter: blur(6px); border-bottom: 1px solid #f0ebe6; }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 88px; }
   .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: "Fredoka", sans-serif; font-weight: 600; color: var(--roxo); font-size: 1.1rem; }
-  .marca img { height: 48px; width: auto; }
+  .marca img { height: 76px; width: auto; }
   .links { display: flex; gap: 26px; list-style: none; }
   .links a { text-decoration: none; font-weight: 600; color: var(--texto-suave); }
   .links a:hover { color: var(--verde-esc); }
   .menu-btn { display: none; background: none; border: 0; font-size: 1.7rem; cursor: pointer; color: var(--roxo); }
   @media (max-width: 760px) {
     .menu-btn { display: block; }
-    .links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid #eee; }
+    .links { display: none; position: absolute; top: 88px; left: 0; right: 0; flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid #eee; }
     .links.aberto { display: flex; }
     .links a { display: block; padding: 14px 16px; }
   }
@@ -69,9 +69,10 @@
   .hero .m2 { width: 260px; height: 260px; top: -90px; right: -90px; }
   .hero .m3 { width: 200px; height: 200px; bottom: -110px; right: 8%; opacity: .5; }
   .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
-  .tag { display: inline-block; background: #E6F4F2; color: var(--verde-esc); font-size: .85rem; font-weight: 700; padding: 5px 14px; border-radius: 99px; margin-bottom: 1rem; }
-  .selo-aex { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
-  .selo-aex img { height: 34px; width: auto; }
+  .tag { display: inline-block; background: #E6F4F2; color: var(--verde-esc); font-size: 1.05rem; font-weight: 700; padding: 8px 18px; border-radius: 99px; margin-bottom: 1rem; }
+  .tag.laranja { background: #FDEBD9; color: #C9742B; }
+  .selo-aex { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .selo-aex img { height: 42px; width: auto; }
   .selo-aex .tag { margin-bottom: 0; }
   .hero h1 { font-size: clamp(2.6rem, 7vw, 4.2rem); font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
   .hero h1 span { color: var(--verde-esc); }
@@ -179,6 +180,7 @@
       <div class="selo-aex">
         <img src="img/aex.jpg" alt="Logo AEX" onerror="this.style.display='none'">
         <span class="tag">Projeto de Extensão · USP</span>
+        <span class="tag laranja">Ame mais animais</span>
       </div>
       <h1>Pata na <span>Consciência</span></h1>
       <p>Uma campanha pela proteção animal, com atenção especial aos <strong>gatos com deficiência</strong>.</p>
