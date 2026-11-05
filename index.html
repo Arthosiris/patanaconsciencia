@@ -201,23 +201,20 @@ p { text-wrap: pretty; }
 .parceiros { list-style: none; }
 .parceiros li + li { margin-top: 8px; }
 .parceiros a, .parceiro-fixo {
-  display: grid; grid-template-columns: auto 1fr auto; gap: 28px; align-items: center; padding: 28px 32px;
+  display: grid; grid-template-columns: auto auto 1fr; gap: 28px; align-items: center; padding: 28px 32px;
   border-radius: 999px; background: #4A3550; text-decoration: none; transition: background-color 200ms ease, transform 160ms var(--ease-out);
 }
 .parceiros a:active { transform: scale(0.99); }
 .parceiros .nome { font-family: var(--display); font-size: clamp(2rem, 1.2rem + 3vw, 4rem); line-height: 1; letter-spacing: -0.03em; }
 .parceiros .papel { color: #E6D9E4; max-width: 36ch; }
-.parceiros .seta { width: 52px; height: 52px; border-radius: 50%; background: var(--laranja); color: var(--roxo); display: grid; place-items: center; font-size: 1.4rem; transition: transform 200ms var(--ease-out); }
 .parceiro-fixo { background: #43304A; }
 .parceiros img { width: 64px; height: 64px; border-radius: 50%; object-fit: contain; background: #fff; padding: 4px; }
 @media (hover: hover) and (pointer: fine) {
   .parceiros a:hover { background-color: #574061; }
-  .parceiros a:hover .seta { transform: translateX(4px); }
 }
 @media (max-width: 900px) {
   .parceiros a, .parceiro-fixo { grid-template-columns: auto 1fr; border-radius: 36px; padding: 24px; gap: 16px 20px; }
   .parceiros .papel { grid-column: 1 / -1; }
-  .parceiros .seta { display: none; }
 }
 
 /* ---------- Contato ---------- */
@@ -395,11 +392,11 @@ p { text-wrap: pretty; }
     <h2 id="t-parc" data-entra>Parcerias</h2>
     <ul class="parceiros">
       <li data-entra style="--atraso:60ms"><a href="https://www.instagram.com/amanimal.adote/" target="_blank" rel="noopener">
-        <img src="img/amanimal.jpg" alt="" width="64" height="64" onerror="this.remove()"><span class="nome">Amanimal</span><span class="papel">ONG de adoção, parceira nas nossas ações.</span><span class="seta" aria-hidden="true">→</span></a></li>
+        <img src="img/amanimal.jpg" alt="" width="64" height="64" onerror="this.remove()"><span class="nome">Amanimal</span><span class="papel">ONG de adoção, parceira nas nossas ações.</span></a></li>
       <li data-entra style="--atraso:120ms"><div class="parceiro-fixo">
         <img src="img/aex.jpg" alt="" width="64" height="64" onerror="this.remove()"><span class="nome">Ame+ AniMais</span><span class="papel">A AEX da USP de onde a campanha nasceu.</span></div></li>
       <li data-entra style="--atraso:180ms"><a href="https://ig.me/m/patanaconsciencia" target="_blank" rel="noopener">
-        <span class="nome">Sua ONG aqui</span><span class="papel">Protege gatos com deficiência? Vamos fazer juntos.</span><span class="seta" aria-hidden="true">→</span></a></li>
+        <span class="nome">Sua ONG aqui</span><span class="papel">Protege gatos com deficiência? Vamos fazer juntos.</span></a></li>
     </ul>
   </div>
 </section>
